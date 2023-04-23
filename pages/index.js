@@ -171,7 +171,7 @@ export default function Home() {
                 <a
                   className="text-blue-500"
                   target="_blank"
-                  href="https://davidwu.io/posts/building-a-simple-chatbot-with-openais-chatgpt-api-nextjs-and-tailwind-css/"
+                  href="https://davidwu.io/posts/building-a-chatbot-with-openais-chatgpt-api-nextjs-and-tailwind-css/"
                 >
                   here
                 </a>{" "}
