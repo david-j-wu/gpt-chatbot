@@ -9,18 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/font": "13.1.1",
-    "next": "13.1.1",
+    "autoprefixer": "10.4.14",
+    "next": "13.4.2",
+    "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-markdown": "^8.0.6",
-    "remark-gfm": "^3.0.1"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.13",
-    "postcss": "^8.4.21",
-    "prettier": "^2.8.7",
-    "prettier-plugin-tailwindcss": "^0.2.7",
-    "tailwindcss": "^3.2.4"
+    "remark-gfm": "^3.0.1",
+    "tailwindcss": "3.3.2"
   }
 }
