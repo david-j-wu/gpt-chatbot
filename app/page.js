@@ -1,4 +1,5 @@
-import Head from "next/head";
+"use client";
+
 import { useState, useEffect, useRef } from "react";
 
 // Used to parse message contents as markdown
@@ -121,149 +122,131 @@ export default function Home() {
   }, [newMessageText]);
 
   return (
-    <>
-      <Head>
-        <title>GPT Chatbot</title>
-        <meta
-          name="description"
-          content={
-            "GPT Chatbot: A simple ChatGPT-powered chatbot" +
-            " built with Next.js and Tailwind CSS"
-          }
-        />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <main className="mx-auto h-screen max-w-full sm:max-w-3xl">
+      <div className="py-8">
+        <h1 className="text-center text-6xl font-bold text-blue-500">
+          GPT Chatbot
+        </h1>
+      </div>
 
-      <main className="mx-auto h-screen max-w-full sm:max-w-3xl">
-        <div className="py-8">
-          <h1 className="text-center text-6xl font-bold text-blue-500">
-            GPT Chatbot
-          </h1>
-        </div>
-
-        {messages.length === 1 && (
-          <div className="mx-10 mt-20 flex justify-center">
-            <div>
-              <p className="mb-2 font-bold">
-                GPT Chatbot is a basic chatbot built with the OpenAI API,
-                Next.js and Tailwind CSS
-              </p>
-              <p className="mb-32">
-                To start a conversation, type a message below and hit send
-              </p>
-              <p className="mb-2">
-                Built by David Wu (
-                <a
-                  className="text-blue-500"
-                  target="_blank"
-                  href="https://twitter.com/david_j_wu"
-                >
-                  @david_j_wu
-                </a>
-                )
-              </p>
-              <p>
-                Read the tutorial to build this chatbot{" "}
-                <a
-                  className="text-blue-500"
-                  target="_blank"
-                  href="https://davidwu.io/posts/building-a-chatbot-with-openais-chatgpt-api-nextjs-and-tailwind-css/"
-                >
-                  here
-                </a>{" "}
-                on{" "}
-                <a
-                  className="text-blue-500"
-                  target="_blank"
-                  href="https://davidwu.io/"
-                >
-                  davidwu.io
-                </a>
-              </p>
-            </div>
+      {messages.length === 1 && (
+        <div className="mx-10 mt-20 flex justify-center">
+          <div>
+            <p className="mb-2 font-bold">
+              GPT Chatbot is a basic chatbot built with the OpenAI API,
+              Next.js and Tailwind CSS
+            </p>
+            <p className="mb-32">
+              To start a conversation, type a message below and hit send
+            </p>
+            <p className="mb-2">
+              Built by David Wu (
+              <a
+                className="text-blue-500"
+                target="_blank"
+                href="https://twitter.com/david_j_wu"
+              >
+                @david_j_wu
+              </a>
+              )
+            </p>
+            <p>
+              Read the tutorial to build this chatbot{" "}
+              <a
+                className="text-blue-500"
+                target="_blank"
+                href="https://davidwu.io/posts/building-a-chatbot-with-openais-chatgpt-api-nextjs-and-tailwind-css/"
+              >
+                here
+              </a>{" "}
+              on{" "}
+              <a
+                className="text-blue-500"
+                target="_blank"
+                href="https://davidwu.io/"
+              >
+                davidwu.io
+              </a>
+            </p>
           </div>
-        )}
-
-        <div>
-          {messages.slice(1).map((message, index) => (
-            <div className="my-4 mx-2" key={index.toString()}>
-              <p className="font-bold">
-                {message.role === "assistant" ? "GPT Chatbot" : "You"}
-              </p>
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {message.content}
-              </ReactMarkdown>
-            </div>
-          ))}
         </div>
+      )}
 
-        {loadingStatus && (
-          <div className="mx-2 mt-4">
-            <p className="font-bold">GPT Chatbot is replying...</p>
+      <div>
+        {messages.slice(1).map((message, index) => (
+          <div className="mx-2 my-4" key={index.toString()}>
+            <p className="font-bold">
+              {message.role === "assistant" ? "GPT Chatbot" : "You"}
+            </p>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {message.content}
+            </ReactMarkdown>
           </div>
-        )}
+        ))}
+      </div>
 
-        {!loadingStatus && messages.length > 1 && (
-          <div className="mt-4 flex justify-center">
-            <button
-              className="h-11 rounded-md border-2 border-gray-500
+      {loadingStatus && (
+        <div className="mx-2 mt-4">
+          <p className="font-bold">GPT Chatbot is replying...</p>
+        </div>
+      )}
+
+      {!loadingStatus && messages.length > 1 && (
+        <div className="mt-4 flex justify-center">
+          <button
+            className="h-11 rounded-md border-2 border-gray-500
                          bg-gray-500 px-1 py-1 hover:border-gray-600 
                          hover:bg-gray-600"
-              onClick={onClick}
-            >
-              <p className="font-bold text-white">New chat</p>
-            </button>
-          </div>
-        )}
+            onClick={onClick}
+          >
+            <p className="font-bold text-white">New chat</p>
+          </button>
+        </div>
+      )}
 
-        <div ref={whitespaceRef} className="z-0"></div>
-        <div
-          ref={backgroundRef}
-          className="fixed bottom-0 z-10 w-full max-w-full bg-white/75
+      <div ref={whitespaceRef} className="z-0"></div>
+      <div
+        ref={backgroundRef}
+        className="fixed bottom-0 z-10 w-full max-w-full bg-white/75
                      sm:max-w-3xl"
-        ></div>
+      ></div>
 
-        <div
-          className="fixed bottom-5 z-20 w-full max-w-full 
+      <div
+        className="fixed bottom-5 z-20 w-full max-w-full 
                      sm:max-w-3xl"
-        >
-          <form className="mx-2 flex items-end" onSubmit={onSubmit}>
-            <textarea
-              ref={textareaRef}
-              className="mr-2 grow resize-none rounded-md border-2 
+      >
+        <form className="mx-2 flex items-end" onSubmit={onSubmit}>
+          <textarea
+            ref={textareaRef}
+            className="mr-2 grow resize-none rounded-md border-2 
                        border-gray-400 p-2 focus:border-blue-600 
                          focus:outline-none"
-              value={newMessageText}
-              onChange={onChange}
-              onKeyDown={onKeyDown}
-              placeholder="Why is the sky blue?"
-            />
+            value={newMessageText}
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+            placeholder="Why is the sky blue?"
+          />
 
-            {loadingStatus ? (
-              <button
-                className="h-11 rounded-md border-2 border-blue-400
+          {loadingStatus ? (
+            <button
+              className="h-11 rounded-md border-2 border-blue-400
                          bg-blue-400 px-1 py-1"
-                disabled
-              >
-                <p className="font-bold text-white">Send</p>
-              </button>
-            ) : (
-              <button
-                className="h-11 rounded-md border-2 border-blue-600
+              disabled
+            >
+              <p className="font-bold text-white">Send</p>
+            </button>
+          ) : (
+            <button
+              className="h-11 rounded-md border-2 border-blue-600
                          bg-blue-600 px-1 py-1 hover:border-blue-700 
                          hover:bg-blue-700"
-                type="submit"
-              >
-                <p className="font-bold text-white">Send</p>
-              </button>
-            )}
-          </form>
-        </div>
-      </main>
-    </>
+              type="submit"
+            >
+              <p className="font-bold text-white">Send</p>
+            </button>
+          )}
+        </form>
+      </div>
+    </main>
   );
 }
