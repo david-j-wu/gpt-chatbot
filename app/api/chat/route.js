@@ -1,16 +1,8 @@
 // Logic for the ChatGPT-powered `/api/chat` endpoint
-export default async function handler(req, res) {
+export async function POST(req) {
   try {
-    // Thrown an error if the request does not have the POST method
-    if (req.method !== "POST") {
-      let error = new Error("Request does not have the POST method.");
-      error.statusCode = 405;
-      error.body = { error: { reason: "Method not allowed" } };
-      throw error;
-    }
-
     // Processing the request body
-    const messages = req.body.messages;
+    const { messages } = await req.json();
 
     // Sending a request to the OpenAI create chat completion endpoint
 
@@ -66,7 +58,10 @@ Total: ${usage.total_tokens}
 `);
 
     // Sending a successful response for our endpoint
-    res.status(200).json({ reply });
+    return new Response(JSON.stringify({ reply }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
     // Error handling
 
@@ -77,13 +72,14 @@ Error: ${JSON.stringify(error.body)}
 `);
 
     // Sending an unsuccessful response for our endpoint
-    res.status(error.statusCode || "500").json({
-      error: {
-        reply: {
-          role: "assistant",
-          content: "An error has occurred.",
-        },
-      },
+    const reply = {
+      role: "assistant",
+      content: "An error has occurred.",
+    };
+
+    return new Response(JSON.stringify({ error: { reply } }), {
+      status: error.statusCode || "500",
+      headers: { "Content-Type": "application/json" },
     });
   }
 }
