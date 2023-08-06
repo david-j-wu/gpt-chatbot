@@ -1,6 +1,6 @@
 # GPT Chatbot: A chatbot built with the OpenAI API, Next.js and Tailwind CSS
 
-This is the source code for the tutorial written by David Wu to build the GPT Chatbot project: Building a chatbot with OpenAI's ChatGPT API, Next.js and Tailwind CSS ([https://davidwu.io/posts/building-a-chatbot-with-openais-chatgpt-api-nextjs-and-tailwind-css/](https://davidwu.io/posts/building-a-chatbot-with-openais-chatgpt-api-nextjs-and-tailwind-css/)).
+This is the source code for the GPT Chatbot web app built with OpenAI's ChatGPT API, Next.js and Tailwind CSS covered in Fullstack GPT ([https://www.fullstack-gpt.com/](https://www.fullstack-gpt.com/)).
 
 The terminal commands below are for Mac and other Linux-based systems. Your mileage may vary if you are using Windows or another operating system.
 
